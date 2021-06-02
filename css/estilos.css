@@ -1,0 +1,124 @@
+/* --------- Estilos generales ------------- */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Añadimos estilos al contenedor general  */
+.contenedor-total{
+    background: #dde1ea;
+}
+
+/* Movemos hacia la derecha el placeholder del campo number */
+input[type="text"]::placeholder{ 
+    text-align: right;
+    color: black;
+}
+
+input[type="text"]{ 
+    text-align: right;
+}
+
+/* Removemos las flechas del campo number*/
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.screen{
+    font-size: 40px;
+    background: transparent;
+    border: none;
+}
+
+/* Aplicamos estilos a los botones en general */
+.btn{
+    background: #e9ecef;
+    padding: 15px 56px;
+    width: 18%;
+    text-align: center;
+}
+
+.btn:hover{
+    background: #818482;
+}
+
+.btn.numeros{
+    background: #f4f5f7;
+    font-weight: bold;
+}
+
+.btn.numeros:hover{
+    background: #818482;
+}
+
+.igual{
+    background: #86a9d1;
+}
+
+.fila{
+    margin: 2px auto;
+}
+
+/* Icono para borrar el historial de los resultados */
+.icono-trash{
+    color: red;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 1200px) {
+    .btn{
+        padding: 15px 41px;
+    }
+    .fila{
+        margin: 2px 2px;
+    }
+}
+
+@media screen and (max-width: 991px) {
+    .btn{
+        padding: 12px 38px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .btn{
+        padding: 12px 45px;
+    }
+}
+
+@media screen and (max-width: 530px) {
+    .btn{
+        padding: 12px 30px;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .btn{
+        padding: 12px 20px;
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width: 350px) {
+    .btn{
+        padding: 10px 15px;
+        font-size: 10px;
+    }
+}
+
+@media screen and (max-width: 280px) {
+    .btn{
+        padding: 7px 10px;
+        font-size: 8px;
+    }
+}
