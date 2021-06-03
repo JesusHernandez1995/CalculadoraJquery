@@ -12,9 +12,7 @@ $(document).ready(function(){
         results.html(results.html() + '<br />' + eval(op));
     }
 
-    const operar = (e, op) => {
-        e.preventDefault();
-
+    function operar(op){
         if(op == "suma")            operador = '+';
         if(op == "resta")           operador = '-';
         if(op == "multiplicacion")  operador = '*';
@@ -31,7 +29,7 @@ $(document).ready(function(){
     for(let i=0; i<=9; i++){
         $("#btn"+i).on('click', function (e) {
             e.preventDefault();
-            var num = 'i';
+            var num = i.toString();
             screen.val(screen.val() + num);
         });
     }
@@ -51,7 +49,10 @@ $(document).ready(function(){
         if(i == 2)    operation = "multiplicacion"; 
         if(i == 3)    operation = "division";  
 
-        $("#"+operation).on('click', operar(e, operation));
+        $("#"+operation).on('click', function(e){
+            e.preventDefault();
+            operar(operation);
+        });
     }
 
     $("#btnigual").on('click', function (e) {
