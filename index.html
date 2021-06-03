@@ -37,7 +37,7 @@
                                 <button class="btn">π</button>
                                 <button class="btn">e</button>
                                 <button class="btn" id="btn_delete">C</button>
-                                <button class="btn"><i class="fas fa-backspace"></i></button>
+                                <button class="btn" id="btn_delete_last_digit"><i class="fas fa-backspace"></i></button>
                             </div>
                         </div>
 
@@ -102,7 +102,7 @@
                                 <button class="btn">ln</button>
                                 <button class="btn numeros">+/-</button>
                                 <button class="btn numeros" id="btn0">0</button>
-                                <button class="btn numeros">,</button>
+                                <button class="btn numeros" id="btnPunto">.</button>
                                 <button class="btn igual" id="btnigual">=</button>
                             </div>
                         </div>
@@ -114,8 +114,8 @@
                 <div class="historial">
                     <h3 class="my-3">Historial</h3>
                     <!-- En este div pondremos los resultados de los cálculos -->
-                    <div id="resultados"></div>
-                    <a class="text-end" id="delete_history"><i class="fas fa-trash-alt icono-trash"></i></a>
+                    <div class="text-end" id="resultados"></div>
+                    <a class="mt-3" id="delete_history"><i class="fas fa-trash-alt icono-trash"></i></a>
                 </div>
             </div>
         </div>

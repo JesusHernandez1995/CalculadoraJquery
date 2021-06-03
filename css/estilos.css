@@ -11,6 +11,10 @@
     background: #dde1ea;
 }
 
+#resultados{
+    color: #818482;
+}
+
 /* Movemos hacia la derecha el placeholder del campo number */
 input[type="text"]::placeholder{ 
     text-align: right;

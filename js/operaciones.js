@@ -3,8 +3,15 @@ $(document).ready(function(){
     /* ----------------------- Variables ------------------- */
        var screen = $("#_calculatorScreen"),
     little_screen = $("#calculos"),
+          results = $("#resultados"),
         operacion = '';
 
+    /* ----------------------- Funciones ------------------- */
+    const publicarHistorial = (op) => {
+        results.html(op);
+        results.html(results.html() + '<br />' + eval(op));
+    }
+     
     /* ----------------------- Eventos ------------------- */
     $("#btn0").on('click', function (e) {
         e.preventDefault();
@@ -66,6 +73,13 @@ $(document).ready(function(){
         screen.val(screen.val() + num);
     });
 
+    // Evento para el punto '.'
+    $("#btnPunto").on('click', function (e) {
+        e.preventDefault();
+        var num = '.';
+        screen.val(screen.val() + num);
+    });
+
     // --------- Operaciones ------------
     $("#suma").on('click', function (e) {
         e.preventDefault();
@@ -105,8 +119,17 @@ $(document).ready(function(){
         valor = screen.val();
         operacion += valor;             // realizamos las operaciones (a + b + ... + n ) Por ejemplo!
         // Mostramos SOLAMENTE la sintaxis de la operación SIN operarlo. Por ejemplo: Se visualizará 8 + 8 + 8
-        little_screen.val(operacion);   // Se visualiza el resultado. Del ejemplo anterior: 24
-        screen.val(eval(operacion));    // Mostramos el resultado final en la pantalla
+        little_screen.val(operacion); 
+        // Checamos si la evaluación de la operación es un entero.
+        if(Number.isInteger(eval(operacion))) { // si lo es, entonces mostramos el resultado de la operación
+            screen.val(eval(operacion));
+        } else {            // si no es entero, acortamos hasta 2 decimales y luego mostramos el resultado
+            x = eval(operacion).toFixed(2);  
+            screen.val(x);    // Se visualiza el resultado. Del ejemplo anterior: 24
+        }
+        // Añadimos un pequeño retardo antes de llamar a la función publicarHistorial
+        setTimeout(publicarHistorial, 500, operacion);
+        // publicarHistorial(operacion);
         operacion = '';                 // reseteamos la operación
     });
 
@@ -115,5 +138,18 @@ $(document).ready(function(){
         e.preventDefault();
         screen.val('');
         little_screen.val('');
+    });
+
+    // Botón para borrar el último digito
+    $("#btn_delete_last_digit").on('click', function(e){
+        e.preventDefault();
+        valor = screen.val();
+        screen.val(valor.substring(0, valor.length - 1));
+    });
+
+    // Botón para borrar el historial
+    $("#delete_history").on('click', function (e) {
+        e.preventDefault();
+        results.html('');
     });
 });
