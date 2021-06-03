@@ -11,67 +11,30 @@ $(document).ready(function(){
         results.html(op);
         results.html(results.html() + '<br />' + eval(op));
     }
+
+    const operar = (e, op) => {
+        e.preventDefault();
+
+        if(op == "suma")            operador = '+';
+        if(op == "resta")           operador = '-';
+        if(op == "multiplicacion")  operador = '*';
+        if(op == "division")        operador = '/';
+
+        valor = screen.val();               // obtenemos el valor de la pantalla grande y lo almacenamos en valor
+        // realizamos la operación, escribimos al final '+', ya que se espera el siguiente operando (a + 'b' -> segundo operando)
+        operacion = operacion + valor + operador;
+        little_screen.val(operacion);       // escribimos en la pantalla pequeña el resultado de la operación
+        screen.val("");                     // limpiamos la pantalla principal
+    }
      
     /* ----------------------- Eventos ------------------- */
-    $("#btn0").on('click', function (e) {
-        e.preventDefault();
-        var num = '0';
-        screen.val(screen.val() + num);
-    });
-    
-    $("#btn1").on('click', function (e) {
-        e.preventDefault();
-        var num = '1';
-        screen.val(screen.val() + num);
-    });
-
-    $("#btn2").on('click', function (e) {
-        e.preventDefault();
-        var num = '2';
-        screen.val(screen.val() + num);
-    });
-
-    $("#btn3").on('click', function (e) {
-        e.preventDefault();
-        var num = '3';
-        screen.val(screen.val() + num);
-    });
-
-    $("#btn4").on('click', function (e) {
-        e.preventDefault();
-        var num = '4';
-        screen.val(screen.val() + num);
-    });
-
-    $("#btn5").on('click', function (e) {
-        e.preventDefault();
-        var num = '5';
-        screen.val(screen.val() + num);
-    });
-
-    $("#btn6").on('click', function (e) {
-        e.preventDefault();
-        var num = '6';
-        screen.val(screen.val() + num);
-    });
-
-    $("#btn7").on('click', function (e) {
-        e.preventDefault();
-        var num = '7';
-        screen.val(screen.val() + num);
-    });
-
-    $("#btn8").on('click', function (e) {
-        e.preventDefault();
-        var num = '8';
-        screen.val(screen.val() + num);
-    });
-
-    $("#btn9").on('click', function (e) {
-        e.preventDefault();
-        var num = '9';
-        screen.val(screen.val() + num);
-    });
+    for(let i=0; i<=9; i++){
+        $("#btn"+i).on('click', function (e) {
+            e.preventDefault();
+            var num = 'i';
+            screen.val(screen.val() + num);
+        });
+    }
 
     // Evento para el punto '.'
     $("#btnPunto").on('click', function (e) {
@@ -81,38 +44,15 @@ $(document).ready(function(){
     });
 
     // --------- Operaciones ------------
-    $("#suma").on('click', function (e) {
-        e.preventDefault();
-        valor = screen.val();               // obtenemos el valor de la pantalla grande y lo almacenamos en valor
-        // realizamos la operación, escribimos al final '+', ya que se espera el siguiente operando (a + 'b' -> segundo operando)
-        operacion = operacion + valor + '+';
-        little_screen.val(operacion);       // escribimos en la pantalla pequeña el resultado de la operación
-        screen.val("");                     // limpiamos la pantalla principal
-    });
+    for(let i=0; i<=3; i++){
+        let operation;
+        if(i == 0)    operation = "suma";
+        if(i == 1)    operation = "resta";
+        if(i == 2)    operation = "multiplicacion"; 
+        if(i == 3)    operation = "division";  
 
-    $("#resta").on('click', function (e) {
-        e.preventDefault();
-        valor = screen.val();               
-        operacion = operacion + valor + '-';
-        little_screen.val(operacion);       
-        screen.val("");   
-    });
-
-    $("#multiplicacion").on('click', function (e) {
-        e.preventDefault();
-        valor = screen.val();               
-        operacion = operacion + valor + '*';
-        little_screen.val(operacion);       
-        screen.val("");   
-    });
-
-    $("#division").on('click', function (e) {
-        e.preventDefault();
-        valor = screen.val();               
-        operacion = operacion + valor + '/';
-        little_screen.val(operacion);       
-        screen.val("");   
-    });
+        $("#"+operation).on('click', operar(e, operation));
+    }
 
     $("#btnigual").on('click', function (e) {
         e.preventDefault();
