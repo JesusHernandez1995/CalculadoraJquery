@@ -1,10 +1,12 @@
 $(document).ready(function(){
     
     /* ----------------------- Variables ------------------- */
-       var screen = $("#_calculatorScreen"),
-    little_screen = $("#calculos"),
-          results = $("#resultados"),
-        operacion = '';
+        var screen = $("#_calculatorScreen"),
+     little_screen = $("#calculos"),
+           results = $("#resultados"),
+      pow_no_hecho = true,
+          auxiliar = '',
+         operacion = '';
 
     /* ----------------------- Funciones ------------------- */
     const publicarHistorial = (op) => {
@@ -12,7 +14,7 @@ $(document).ready(function(){
         results.html(results.html() + '<br />' + eval(op));
     }
 
-    function operar(op){
+    const operar = (op) => { 
         if(op == "suma")            operador = '+';
         if(op == "resta")           operador = '-';
         if(op == "multiplicacion")  operador = '*';
@@ -22,15 +24,23 @@ $(document).ready(function(){
         // realizamos la operación, escribimos al final '+', ya que se espera el siguiente operando (a + 'b' -> segundo operando)
         operacion = operacion + valor + operador;
         little_screen.val(operacion);       // escribimos en la pantalla pequeña el resultado de la operación
+        console.log(operacion);
         screen.val("");                     // limpiamos la pantalla principal
     }
      
-    /* ----------------------- Eventos ------------------- */
+    const calcular_pow = () => {
+        screen.val(Math.pow(auxiliar, screen.val()));
+        pow_no_hecho = true;
+        console.log("ha entrado");
+    }
+
+    /* ----------------------- Eventos números (0-9) ------------------- */
     for(let i=0; i<=9; i++){
         $("#btn"+i).on('click', function (e) {
             e.preventDefault();
             var num = i.toString();
             screen.val(screen.val() + num);
+            if(!pow_no_hecho)    calcular_pow(); 
         });
     }
 
@@ -41,7 +51,7 @@ $(document).ready(function(){
         screen.val(screen.val() + num);
     });
 
-    // --------- Operaciones ------------
+    // --------- Evento para las operaciones básicas (+,-,*,/) ------------
     for(let i=0; i<=3; i++){
         let operation;
         if(i == 0)    operation = "suma";
@@ -54,7 +64,56 @@ $(document).ready(function(){
             operar(operation);
         });
     }
+    // ----------------------------------
+    // Evento para elevar un número al cuadrado
+    $("#cuadrado").on('click', function (e) {
+        e.preventDefault();
+        screen.val(screen.val() * screen.val());
+    });
+    
+    // Evento para la tecla PI
+    $("#btnPi").on('click', function (e) {
+        e.preventDefault();
+        screen.val(Math.PI);
+    });
 
+    // Evento para la tecla 'e'
+    $("#btn_e").on('click', function (e) {
+        e.preventDefault();
+        screen.val(Math.E);
+    });
+
+    // Evento para realizar las potencias
+    $("#potencia").on('click', function (e) {
+        e.preventDefault();
+        auxiliar = screen.val();
+        pow_no_hecho = false;
+        screen.val("");
+    });
+
+    // Evento para calcular el factorial
+    $("#factorial").on('click', function (e) {
+        e.preventDefault();
+        let total = 1;
+        for(let i = 1; i <= screen.val(); i++){
+            total *= i;
+        }
+        screen.val(total);
+    });
+
+    // Evento para calcular el inverso
+    $("#inversoX").on('click', function (e) {
+        e.preventDefault();
+        screen.val(1 / screen.val());
+    });
+
+    // Evento para calcular la raíz cuadrada
+    $("#raiz").on('click', function (e) {
+        e.preventDefault();
+        screen.val(Math.sqrt(screen.val()));
+    });
+
+    // Evento cuando se presiona la tecla de =
     $("#btnigual").on('click', function (e) {
         e.preventDefault();
         valor = screen.val();
