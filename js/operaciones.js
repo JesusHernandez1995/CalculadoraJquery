@@ -89,6 +89,12 @@ $(document).ready(function(){
         auxiliar = screen.val();
         pow_no_hecho = false;
         screen.val("");
+    }); 
+    
+    // Evento para elevar en base a 10 cualquier número
+    $("#btn10expX").on('click', function (e) {
+        e.preventDefault();
+        screen.val(Math.pow(10, screen.val()));
     });
 
     // Evento para calcular el factorial
@@ -107,10 +113,31 @@ $(document).ready(function(){
         screen.val(1 / screen.val());
     });
 
+    // Evento para el botón de Log en base a 10
+    $("#btnlog").on('click', function (e) {
+        e.preventDefault();
+        if(screen.val() <= 0)   screen.val("Math Error");
+        else          screen.val(Math.log10(screen.val()));
+    });
+
+    // Evento para el botón de Ln en base a 'e'
+    $("#btnln").on('click', function (e) {
+        e.preventDefault();
+        if(screen.val() <= 0)   screen.val("Math Error");
+        else          screen.val(Math.log(screen.val()));
+    });
+
     // Evento para calcular la raíz cuadrada
     $("#raiz").on('click', function (e) {
         e.preventDefault();
-        screen.val(Math.sqrt(screen.val()));
+        if(screen.val() < 0)    screen.val("Math Error");
+        else         screen.val(Math.sqrt(screen.val()));
+    });
+
+    // Evento que cambia el signo del número
+    $("#pos_neg").on('click', function (e) {
+        e.preventDefault();
+        screen.val(screen.val()*-1);
     });
 
     // Evento cuando se presiona la tecla de =
