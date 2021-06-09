@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- CSS Bootstrap file -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <!-- CSS Fontawesome file -->
+    <link rel="stylesheet" href="css/all.min.css">
+    <!-- CSS custom file -->
+    <link rel="stylesheet" href="css/estilos.css">
+    <title>Calculadora hecha con Jquery</title>
+</head>
+<body>
+
+    <div class="container">
+        <div class="row contenedor-total">
+            <!-- Columna izquierda: calculadora -->
+            <div class="col-md-8">
+                <h3 class="my-3">Calculadora Científica</h3>
+                <div class="calculadora">
+                    <!-- Pantalla para visualizar las operaciones anteriores -->
+                    <div class="little-screen text-end" >
+                        <input type="text" id="calculos" disabled>
+                    </div>
+                    <!-- Pantalla Principal -->
+                    <div class="input-group mb-3 pt-4" name="formulario">
+                        <input type="text" class="form-control screen" placeholder="0" id="_calculatorScreen" readonly/>
+                    </div>
+                    <!-- Contenedor de los botones de la calculadora -->
+                    <section class="botones">
+                        <!-- 1era hilera de botones -->
+                        <div class="row fila">
+                            <div class="col-12 d-flex justify-content-between">
+                                <button class="btn">2<sup>nd</sup></button>
+                                <button class="btn" id="btnPi">π</button>
+                                <button class="btn" id="btn_e">e</button>
+                                <button class="btn" id="btn_delete">C</button>
+                                <button class="btn" id="btn_delete_last_digit"><i class="fas fa-backspace"></i></button>
+                            </div>
+                        </div>
+
+                        <!-- 2da hilera de botones -->
+                        <div class="row fila">
+                            <div class="col-12 d-flex justify-content-between">
+                                <button class="btn" id="cuadrado"><i>x</i><sup>2</sup></button>
+                                <button class="btn" id="inversoX">1/<i>x</i></button>
+                                <button class="btn" id="btn_abs">|<i>x</i>|</button>
+                                <button class="btn">exp</button>
+                                <button class="btn" id="resto">mod</button>
+                            </div>
+                        </div>
+
+                        <!-- 3era hilera de botones -->
+                        <div class="row fila">
+                            <div class="col-12 d-flex justify-content-between">
+                                <button class="btn" id="raiz">√x</button>
+                                <button class="btn" id="parApertura">(</button>
+                                <button class="btn" id="parCierre">)</button>
+                                <button class="btn" id="factorial"><i>n!</i></button>
+                                <button class="btn" id="division">÷</button>
+                            </div>
+                        </div>
+
+                        <!-- 4ta hilera de botones -->
+                        <div class="row fila">
+                            <div class="col-12 d-flex justify-content-between">
+                                <button class="btn" id="potencia"><i>x</i><sup>y</sup></button>
+                                <button class="btn numeros" id="btn7">7</button>
+                                <button class="btn numeros" id="btn8">8</button>
+                                <button class="btn numeros" id="btn9">9</button>
+                                <button class="btn" id="multiplicacion">X</button>
+                            </div>
+                        </div>
+
+                        <!-- 5ta hilera de botones -->
+                        <div class="row fila">
+                            <div class="col-12 d-flex justify-content-between">
+                                <button class="btn" id="btn10expX"><i>10</i><sup>x</sup></button>
+                                <button class="btn numeros" id="btn4">4</button>
+                                <button class="btn numeros" id="btn5">5</button>
+                                <button class="btn numeros" id="btn6">6</button>
+                                <button class="btn" id="resta">-</button>
+                            </div>
+                        </div>
+
+                        <!-- 6ta hilera de botones -->
+                        <div class="row fila">
+                            <div class="col-12 d-flex justify-content-between">
+                                <button class="btn" id="btnlog">log</button>
+                                <button class="btn numeros" id="btn1">1</button>
+                                <button class="btn numeros" id="btn2">2</button>
+                                <button class="btn numeros" id="btn3">3</button>
+                                <button class="btn" id="suma">+</button>
+                            </div>
+                        </div>
+
+                        <!-- 7ta hilera de botones -->
+                        <div class="row fila">
+                            <div class="col-12 d-flex justify-content-between">
+                                <button class="btn" id="btnln">ln</button>
+                                <button class="btn numeros" id="pos_neg">+/-</button>
+                                <button class="btn numeros" id="btn0">0</button>
+                                <button class="btn numeros" id="btnPunto">.</button>
+                                <button class="btn igual" id="btnigual">=</button>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            <!-- Columna derecha: Historial -->
+            <div class="d-none d-md-block col-md-4">
+                <div class="historial">
+                    <h3 class="my-3">Historial</h3>
+                    <!-- En este div pondremos los resultados de los cálculos -->
+                    <div class="text-end" id="resultados"></div>
+                    <a class="mt-3" id="delete_history"><i class="fas fa-trash-alt icono-trash"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Bootstrap file -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+    <!-- Jquery CDN link -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <!-- Jquery custom file -->
+    <script src="js/operaciones.js"></script>
+</body>
+</html>
