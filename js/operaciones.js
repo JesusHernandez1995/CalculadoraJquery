@@ -6,6 +6,7 @@ $(document).ready(function(){
            results = $("#resultados"),
       pow_no_hecho = true,
           auxiliar = '',
+          auxiliar2 = '',
          operacion = '';
 
     /* ----------------------- Funciones ------------------- */
@@ -19,12 +20,12 @@ $(document).ready(function(){
         if(op == "resta")           operador = '-';
         if(op == "multiplicacion")  operador = '*';
         if(op == "division")        operador = '/';
+        if(op == "resto")           operador = '%';
 
         valor = screen.val();               // obtenemos el valor de la pantalla grande y lo almacenamos en valor
         // realizamos la operación, escribimos al final '+', ya que se espera el siguiente operando (a + 'b' -> segundo operando)
         operacion = operacion + valor + operador;
         little_screen.val(operacion);       // escribimos en la pantalla pequeña el resultado de la operación
-        console.log(operacion);
         screen.val("");                     // limpiamos la pantalla principal
     }
      
@@ -51,13 +52,14 @@ $(document).ready(function(){
         screen.val(screen.val() + num);
     });
 
-    // --------- Evento para las operaciones básicas (+,-,*,/) ------------
-    for(let i=0; i<=3; i++){
+    // --------- Evento para las operaciones básicas (+,-,*,/,%) ------------
+    for(let i=0; i<=4; i++){
         let operation;
         if(i == 0)    operation = "suma";
         if(i == 1)    operation = "resta";
         if(i == 2)    operation = "multiplicacion"; 
         if(i == 3)    operation = "division";  
+        if(i == 4)    operation = "resto"; 
 
         $("#"+operation).on('click', function(e){
             e.preventDefault();
@@ -127,11 +129,29 @@ $(document).ready(function(){
         else          screen.val(Math.log(screen.val()));
     });
 
+    // Evento para el botón de valor absoluto
+    $("#btn_abs").on('click', function (e) {
+        e.preventDefault();
+        screen.val(Math.abs(screen.val()));
+    });
+
     // Evento para calcular la raíz cuadrada
     $("#raiz").on('click', function (e) {
         e.preventDefault();
         if(screen.val() < 0)    screen.val("Math Error");
         else         screen.val(Math.sqrt(screen.val()));
+    });
+
+    // Evento para escribir el paréntesis de apertura
+    $("#parApertura").on('click', function (e) {
+        e.preventDefault();
+        screen.val(auxiliar2 = auxiliar2 + screen.val() + "(");
+    });
+    
+    // Evento para escribir el paréntesis de cierre
+    $("#parCierre").on('click', function (e) {
+        e.preventDefault();
+        screen.val(auxiliar2 = auxiliar2 + screen.val().replace('(', '') + ")");
     });
 
     // Evento que cambia el signo del número
@@ -165,6 +185,7 @@ $(document).ready(function(){
         e.preventDefault();
         screen.val('');
         little_screen.val('');
+        auxiliar2 = '';
     });
 
     // Botón para borrar el último digito
